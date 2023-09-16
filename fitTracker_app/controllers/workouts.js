@@ -8,6 +8,7 @@ const Workouts = require('../models/workouts.js')
 router.get('/', async (req, res) => {
   const allWorkouts = await Workouts.find({}) //get all workouts from the database and save to a variable called allWorkouts
   //render the index.ejs template and pass it the allWorkouts variable as "workouts"
+  console.log(allWorkouts)
   res.render('index.ejs', { workouts: allWorkouts }) //this is the data we are sending to the index.ejs file
 })
 
@@ -19,14 +20,23 @@ router.get('/new', (req, res) => {
 //show route to render "show.ejs" with the data for a single workout
 router.get('/:id', async (req, res) => {
   const foundWorkout = await Workouts.findById(req.params.id) //find the workout by id and save it to a variable called foundWorkout
+  console.log(foundWorkout) //log the foundWorkout to the console
   res.render('show.ejs', { workout: foundWorkout }) //render the show.ejs template and pass it the foundWorkout variable as "workout"
+})
+
+//edit route to render "edit.ejs" with the data for a single workout
+router.get('/:id/edit', async (req, res) => { //:id is the id of the workout we want to edit
+  const foundWorkout = await Workouts.findById(req.params.id) //find the workout by id and save it to a variable called foundWorkout
+  console.log(foundWorkout) //log the foundWorkout to the console
+  res.render('edit.ejs', { workout: foundWorkout }) //render the edit.ejs template and pass it the foundWorkout variable as "workout"
+
 })
 
 //post route to create a new workout
 router.post('/', async (req, res) => {
   try{
-  const createdWorkout = await Workouts.create(req.body) //create a new workout with the data from the request body and save it to a variable called created workout
-  console.log(createdWorkout) //log the created workout to the console
+  const newWorkout = await Workouts.create(req.body) //create a new workout with the data from the request body and save it to a variable called created newWorkout
+  console.log(newWorkout) //log the created workout to the console
   res.redirect('/workouts') //redirect to the index route
   }
   catch(err){

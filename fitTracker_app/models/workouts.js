@@ -5,8 +5,8 @@ const workoutSchema = new mongoose.Schema({
     reps: { type: String, required: true},
     sets: { type: String, required: true},
     weight: { type: String, required: true},
-    date: { type: String, required: true},
-    notes: { type: String, required: true}
+    date: { type: String, required: false},
+    notes: { type: String, required: false}
 })
 
 // create our workout model
