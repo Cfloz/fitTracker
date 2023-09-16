@@ -55,4 +55,24 @@ app.get('/any', (req, res) => { //this is a route that starts with '/any'
   res.redirect('/workouts') //redirect to the workouts index route
 })
 
+app.get('/retrieve', (req, res) => { //this is a route that starts with '/retrieve'
+  if(req.session.anyProperty === 'any value'){ //if the anyProperty property on the session object is equal to 'any value'
+  console.log('match!')
+  res.send('The value of anyProperty is: ' + req.session.anyProperty) //send the value of the anyProperty property on the session object
+}
+else{
+  console.log('no match!')
+}
+res.redirect('/workouts') //redirect to the workouts index route
+})
 
+app.get('/updateSession', (req, res) => {//this is a route that starts with '/updateSession'')
+   req.session.anyProperty = 'not something' //here we are updating the value of the anyProperty property on the session object
+   res.redirect('/workouts') //redirect to the workouts index route
+})
+
+
+//listen on the port
+app.listen(PORT, () => {
+  console.log('server is listening on port: ', PORT)
+})

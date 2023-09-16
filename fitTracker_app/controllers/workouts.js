@@ -39,5 +39,30 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req,res) =>{ //:id is the id of the workout we want to update
   try{
     //find the workout by id and update it with the data from the request body
-    req.body.
+    req.body.exercises = req.body.exercises.split(',')
+    const updateWorkout = await Workouts.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    console.log(updateWorkout) //log the updated workout to the console
+    res.redirect('/workouts' + updatedWorkout.id) //redirect to the show route for the updated workout
+  }
+  catch(err){
+    console.log(err)
+    res.status(500).json(err)
+  }
 })
+
+//delete route to delete a workout
+router.delete('/:id', async (req, res) => {
+  try{
+    
+    const deletedWorkout = await Workouts.findByIdAndRemove(req.params.id) //find the workout by id and delete it
+    console.log(deletedWorkout) //log the deleted workout to the console
+    res.redirect('/workouts') //redirect to the index route
+  }
+  catch(err){
+    console.log(err)
+    res.status(500).json(err)
+  }
+})
+
+
+module.exports = router //export the router with all of the routes defined above
