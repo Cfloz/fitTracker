@@ -37,6 +37,22 @@ const isAuthenticated = (req, res, next) => {
   if (req.session.currentUser) {
     return next()
   } else {
-    res.redirect('/user/new')
+    res.redirect('/user/login')
   }
 }
+
+//use the with app.use() method to tell express to use the workoutsController for all routes that start with '/workouts'
+app.use('/user', userController)//use the userController for all routes that start with '/user'
+
+app.use('isAuthenticated')//use the isAuthenticated middleware for all routes that start with '/workouts'
+
+app.use('/workouts', workoutsController)// use the workoutsController for all routes that start with '/workouts'
+
+//here we are telling the app when you see the URL that starts with '/workouts' use the workoutsController
+
+app.get('/any', (req, res) => { //this is a route that starts with '/any'
+  res.session.anyProperty = 'any value' //here we are setting a property on the session object
+  res.redirect('/workouts') //redirect to the workouts index route
+})
+
+
