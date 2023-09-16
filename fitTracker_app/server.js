@@ -29,4 +29,14 @@ mongoose.connection.on('connected', () => console.log('Mongo connected: ', mongo
 mongoose.connection.on('disconnected', () => console.log('Mongo disconnected'))
 
 //import router controllers
+const workoutsController = require('./controllers/workouts.js') //import the workouts controller and save it to a variable called workoutsController
+const userController = require('./controllers/users.js') //import the users controller and save it to a variable called userController
 
+//auth middleware - if the user is not logged in, redirect them to the login page
+const isAuthenticated = (req, res, next) => {
+  if (req.session.currentUser) {
+    return next()
+  } else {
+    res.redirect('/user/new')
+  }
+}

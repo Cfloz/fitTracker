@@ -34,3 +34,10 @@ router.post('/', async (req, res) => {
     res.status(500).json(err)
   }
 })
+
+//put route to update a workout
+router.put('/:id', async (req,res) =>{ //:id is the id of the workout we want to update
+  try{
+    //find the workout by id and update it with the data from the request body
+    req.body.
+})
