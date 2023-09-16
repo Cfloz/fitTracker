@@ -8,7 +8,7 @@ const Workouts = require('../models/workouts.js')
 router.get('/', async (req, res) => {
   const allWorkouts = await Workouts.find({}) //get all workouts from the database and save to a variable called allWorkouts
   //render the index.ejs template and pass it the allWorkouts variable as "workouts"
-  res.render('workouts/index.ejs', { workouts: allWorkouts }) //this is the data we are sending to the index.ejs file
+  res.render('index.ejs', { workouts: allWorkouts }) //this is the data we are sending to the index.ejs file
 })
 
 //new route - get the form to create a new workout from new.ejs
