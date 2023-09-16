@@ -11,26 +11,29 @@ require('dotenv').config()
 //Middleware configuration this will parase the data from the body of the request and add it to the request object as req.body
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
-app.use(express.static({
-  session: process.env.SECRET,
-  resave: false,
-  saveUninitialized: false
-
-}))
+app.use(
+  session({
+    secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
+    resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
+    saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
+  })
+)
 //enviroment variables
 const PORT = process.env.PORT
-const mongodbURI = process.env.MONGODBURI
+const mongoURI = process.env.MONGODBURI
 
 //connect to mongo
-const db = mongoose.connect(mongodbURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
-//connection error/success
-mongoose.connection.on('error', (err) => console.log('Error in Mongo connection: ', err.message))
-mongoose.connection.on('connected', () => console.log('Mongo connected: ', mongodbURI))
-mongoose.connection.on('disconnected', () => console.log('Mongo disconnected'))
+mongoose.connect(mongoURI)
+
+const db = mongoose.connection
+// optional create status messages to check mongo connection 
+db.on('error', (err) => { console.log('ERROR: ' , err)})
+db.on('connected', () => { console.log('mongo connected')})
+db.on('disconnected', () => { console.log('mongo disconnected')})
 
 //import router controllers
 const workoutsController = require('./controllers/workouts.js') //import the workouts controller and save it to a variable called workoutsController
-const userController = require('./controllers/users.js') //import the users controller and save it to a variable called userController
+const userController = require('./controllers/user.js') //import the users controller and save it to a variable called userController
 
 //auth middleware - if the user is not logged in, redirect them to the login page
 const isAuthenticated = (req, res, next) => {
@@ -44,7 +47,7 @@ const isAuthenticated = (req, res, next) => {
 //use the with app.use() method to tell express to use the workoutsController for all routes that start with '/workouts'
 app.use('/user', userController)//use the userController for all routes that start with '/user'
 
-app.use('isAuthenticated')//use the isAuthenticated middleware for all routes that start with '/workouts'
+app.use(isAuthenticated)//use the isAuthenticated middleware for all routes that start with '/workouts'
 
 app.use('/workouts', workoutsController)// use the workoutsController for all routes that start with '/workouts'
 
