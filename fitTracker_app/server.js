@@ -22,7 +22,7 @@ const PORT = process.env.PORT
 const mongodbURI = process.env.MONGODBURI
 
 //connect to mongo
-mongoose.connect(mongodbURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+const db = mongoose.connect(mongodbURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 //connection error/success
 mongoose.connection.on('error', (err) => console.log('Error in Mongo connection: ', err.message))
 mongoose.connection.on('connected', () => console.log('Mongo connected: ', mongodbURI))
