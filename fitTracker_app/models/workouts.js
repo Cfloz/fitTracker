@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
 const workoutSchema = new mongoose.Schema({
-    workout: { type: String, required: true },
-    reps: { type: String, required: true},
-    sets: { type: String, required: true},
-    weight: { type: String, required: true},
-    date: { type: String, required: false},
-    notes: { type: String, required: false}
+    workout: { type: String},
+    reps: { type: String},
+    sets: { type: String},
+    weight: { type: String},
+    date: { type: String},
+    notes: { type: String}
 })
 
 // create our workout model

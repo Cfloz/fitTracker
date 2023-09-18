@@ -11,6 +11,9 @@ require('dotenv').config()
 //Middleware configuration this will parase the data from the body of the request and add it to the request object as req.body
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+app.use(express.static(__dirname + '/public'));//this tells express to use the public folder for static assets
+app.use(express.static('public/css'))
+app.use(express.static('images'))
 app.use(
   session({
     secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
