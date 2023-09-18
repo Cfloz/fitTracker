@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">     
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="/css/app.css" rel="stylesheet"  type="text/css">
+  <title>Fit Tracker</title>
+</head>
+<body>
+  <section class="login-page vh-100 d-flex align-items-center justify-content-center">
+    <div class="container">
+      <div class="row">
+        <h1 class="fs-1 text-light fw-semibold text-center"> FitTracker </h1>
+        <div class="col">
+          <img class="app-image mx-auto d-block" src="https://pixabay.com/get/g882f8752b82edf08c1d92677b1a00767c87ce498e275b84961ea830b99f610d8f8c21dd0bb8f49b587b54cb656ef0f9265efb1aa81d59b0ad73414996313ffddb578bf4b0d07a83b650a4ace4e85b7e0_640.jpg">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          
+          <div class="card">
+            <div class="card-body">
+              <h1 class="card-title text-center mb-4">Login</h1>
+
+              <form action="/user/login/" method="POST">
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Username" name="username">
+                </div>
+                <div class="mb-3">
+                  <input type="password" class="form-control" placeholder="Password" name="password">
+                </div>
+                <div class="d-grid">
+                  <input type="submit" class="btn btn-primary" value="Login">
+                </div>
+              </form>
+
+              <div class="text-center mt-3">
+                <a href="/user/">Create an Account</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+</body>
+</html>
