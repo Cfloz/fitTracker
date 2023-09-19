@@ -1,7 +1,15 @@
-section.login-page.vh-100.d-flex.align-items-center.justify-content-center{
-    background-color: #88a1c1 !important;
+section.login-page.vh-100.d-flex.align-items-center.justify-content-center {
+	background-color: #88a1c1 !important;
 }
 
-.bg-primary{
-    background-color: #88a1c1 !important;
+section.login-page.vh-100.d-flex.align-items-baseline.justify-content-center {
+	background-color: #88a1c1 !important;
+}
+.bg-primary {
+	background-color: #88a1c1 !important;
+}
+
+.table {
+	overflow: hidden;
+	border: 1px solid black !important;
 }
